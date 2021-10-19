@@ -27,7 +27,7 @@ function removeActive(listArray) {
   });
 }
 
-/** create nav items and append to ul element
+/** creating nav items and append to ul element
  * call li values and append a element
  */
 
@@ -64,33 +64,36 @@ attachListEvent();
 /**
  * styling the list's active state to show what section is being viewed when scrolling
  */
+
 document.addEventListener("scroll", function (evt) {
   const list = document.querySelectorAll(".new-nav");
   let listNodesArray = Array.from(list);
   sectionArray.forEach((sec, index) => {
     let rectangle = sec.getBoundingClientRect();
-    console.log(window.scrollY, rectangle.top, rectangle.bottom);
-    if (window.scrollY >= rectangle.top) {
+
+    if (window.scrollY >= rectangle.bottom) {
       const sectionId = sec.getAttribute("id");
       const list = document.getElementById("li-" + sectionId);
       removeActive(listNodesArray);
       list.classList.add("active-nav");
     }
   });
-  /**
-   * create a floating icon to jump to the top of the page
-   * icon disappears after 3seconds at the top
-   */
-  const about = document.getElementById("section1");
-  const rectangle = about.getBoundingClientRect();
-  if (window.scrollY <= rectangle.top) {
-    setTimeout(() => {
-      floatButton.classList.add("jump-hide");
-    }, 3000);
-  } else {
-    floatButton.classList.remove("jump-hide");
-  }
 });
+
+/**
+ * creating a floating icon to jump to the top of the page
+ * icon disappears after 3seconds at the top
+ */
+
+const about = document.getElementById("section1");
+const rectangle = about.getBoundingClientRect();
+if (window.scrollY <= rectangle.top) {
+  setTimeout(() => {
+    floatButton.classList.add("jump-hide");
+  }, 3000);
+} else {
+  floatButton.classList.remove("jump-hide");
+}
 
 floatButton.addEventListener("click", () => {
   const about = document.getElementById("section1");
@@ -102,7 +105,7 @@ floatButton.addEventListener("click", () => {
 });
 
 /**
- * style the menu for mobile screens
+ * styling the menu for mobile screens
  */
 
 menu.addEventListener("click", () => {

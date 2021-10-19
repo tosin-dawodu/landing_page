@@ -233,6 +233,7 @@ footer {
   }
   .show-side-nav {
     display: block;
+    position: fixed;
   }
   .close-menu {
     display: flex;
