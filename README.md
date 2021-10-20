@@ -7,4 +7,4 @@ This project reflects the use of basic javascript manipulation for the DOM. As t
 - Link nav items to sections in the body.
 - Use event listeners for click events and so on.
 
-Click [here](https://td-landing-page.netlify.app/) to view deployed site.
+Click [here](https://tosin-dawodu.github.io/landing_page/) to view deployed site.
