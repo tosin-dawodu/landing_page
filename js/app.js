@@ -57,12 +57,10 @@ let attachListEvent = function (listArray) {
   listArray.forEach((x) => {
     x.addEventListener("click", function () {
       removeActive(listArray);
-      // console.log(x.offsetTop + x.offsetHeight)
       const listId = x.getAttribute("id");
       const sectionId = listId.split("-")[1];
       clickedSection = sectionId;
       let sec = document.getElementById(sectionId);
-      console.log(sectionId, sec.offsetTop);
       x.scrollTo({
         top: sec.offsetTop,
         behaviour: "smooth",
@@ -91,7 +89,6 @@ document.addEventListener("scroll", function (evt) {
     const sectionHeight = sec.offsetHeight;
     const sectionTop = sec.offsetTop - 150;
     const sectionId = sec.getAttribute("id");
-    console.log(scrollY, sectionTop, sectionTop + sectionHeight);
     if (
       scrollY > sectionTop &&
       scrollY <= sectionTop + sectionHeight &&
