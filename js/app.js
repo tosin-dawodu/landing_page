@@ -38,14 +38,11 @@ function removeActive(listArray) {
 const sectionArray = Array.from(sections);
 sectionArray.forEach((sec) => {
   const newList = document.createElement("li");
-  let anchorTag = document.createElement("a");
   const sectionId = sec.getAttribute("id");
-  anchorTag.setAttribute("href", "#" + sectionId);
-  const anchorText = sectionMap[sectionId];
-  anchorTag.append(anchorText);
+  const listText = sectionMap[sectionId];
   newList.setAttribute("class", "new-nav");
-  newList.appendChild(anchorTag);
   newList.setAttribute("id", "li-" + sectionId);
+  newList.append(listText);
   nav.appendChild(newList);
 });
 
@@ -59,10 +56,9 @@ let attachListEvent = function (listArray) {
       removeActive(listArray);
       const listId = x.getAttribute("id");
       const sectionId = listId.split("-")[1];
-      clickedSection = sectionId;
       let sec = document.getElementById(sectionId);
-      x.scrollTo({
-        top: sec.offsetTop,
+      window.scrollTo({
+        top: sec.offsetTop - 50,
         behaviour: "smooth",
       });
       x.classList.add("active-nav");
@@ -87,13 +83,12 @@ document.addEventListener("scroll", function (evt) {
   sectionArray.forEach((sec, index) => {
     let rectangle = sec.getBoundingClientRect();
     const sectionHeight = sec.offsetHeight;
-    const sectionTop = sec.offsetTop - 150;
+    /**
+     * substract 60px which is the height of the nav so active state will be triggered when section is just below the navbar
+     */
+    const sectionTop = sec.offsetTop - 60;
     const sectionId = sec.getAttribute("id");
-    if (
-      scrollY > sectionTop &&
-      scrollY <= sectionTop + sectionHeight &&
-      clickedSection != "section4"
-    ) {
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
       const list = document.getElementById("li-" + sectionId);
       removeActive(listNodesArray);
       list.classList.add("active-nav");
