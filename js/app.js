@@ -11,6 +11,8 @@ const sectionMap = {
   section4: "Contact",
 };
 
+let clickedSection = "None";
+
 const floatButton = document.querySelector(".jump");
 
 const sideNav = document.querySelector(".side-nav");
@@ -18,6 +20,8 @@ const sideNav = document.querySelector(".side-nav");
 const menu = document.querySelector(".hamburger-menu");
 
 const closeMenu = document.querySelector(".close-menu");
+
+const sideNavList = document.querySelectorAll(".sli-section");
 
 // Define helper functions
 
@@ -49,17 +53,29 @@ sectionArray.forEach((sec) => {
  * adding a click event that will show section when the list is clicked in nav
  */
 
-let attachListEvent = function () {
-  const list = document.querySelectorAll(".new-nav");
-  let listNodesArray = Array.from(list);
-  listNodesArray.forEach((x) => {
+let attachListEvent = function (listArray) {
+  listArray.forEach((x) => {
     x.addEventListener("click", function () {
-      removeActive(listNodesArray);
+      removeActive(listArray);
+      // console.log(x.offsetTop + x.offsetHeight)
+      const listId = x.getAttribute("id");
+      const sectionId = listId.split("-")[1];
+      clickedSection = sectionId;
+      let sec = document.getElementById(sectionId);
+      console.log(sectionId, sec.offsetTop);
+      x.scrollTo({
+        top: sec.offsetTop,
+        behaviour: "smooth",
+      });
       x.classList.add("active-nav");
     });
   });
 };
-attachListEvent();
+const list = document.querySelectorAll(".new-nav");
+let listNodesArray = Array.from(list);
+attachListEvent(listNodesArray);
+let sideNavListArray = Array.from(sideNavList);
+attachListEvent(sideNavListArray);
 
 /**
  * styling the list's active state to show what section is being viewed when scrolling
@@ -67,33 +83,45 @@ attachListEvent();
 
 document.addEventListener("scroll", function (evt) {
   const list = document.querySelectorAll(".new-nav");
+  let sideNavListArray = Array.from(sideNavList);
   let listNodesArray = Array.from(list);
+  let scrollY = window.pageYOffset;
   sectionArray.forEach((sec, index) => {
     let rectangle = sec.getBoundingClientRect();
-
-    if (window.scrollY >= rectangle.bottom) {
-      const sectionId = sec.getAttribute("id");
+    const sectionHeight = sec.offsetHeight;
+    const sectionTop = sec.offsetTop - 150;
+    const sectionId = sec.getAttribute("id");
+    console.log(scrollY, sectionTop, sectionTop + sectionHeight);
+    if (
+      scrollY > sectionTop &&
+      scrollY <= sectionTop + sectionHeight &&
+      clickedSection != "section4"
+    ) {
       const list = document.getElementById("li-" + sectionId);
       removeActive(listNodesArray);
       list.classList.add("active-nav");
+
+      const slist = document.getElementById("sli-" + sectionId);
+      removeActive(sideNavListArray);
+      slist.classList.add("active-nav");
     }
   });
+
+  const about = document.getElementById("section1");
+  const rectangle = about.getBoundingClientRect();
+  if (window.scrollY <= rectangle.top) {
+    setTimeout(() => {
+      floatButton.classList.add("jump-hide");
+    }, 3000);
+  } else {
+    floatButton.classList.remove("jump-hide");
+  }
 });
 
 /**
  * creating a floating icon to jump to the top of the page
  * icon disappears after 3seconds at the top
  */
-
-const about = document.getElementById("section1");
-const rectangle = about.getBoundingClientRect();
-if (window.scrollY <= rectangle.top) {
-  setTimeout(() => {
-    floatButton.classList.add("jump-hide");
-  }, 3000);
-} else {
-  floatButton.classList.remove("jump-hide");
-}
 
 floatButton.addEventListener("click", () => {
   const about = document.getElementById("section1");

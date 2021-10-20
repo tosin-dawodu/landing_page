@@ -32,23 +32,26 @@ nav {
   padding: 0 26px;
 }
 .active-nav a {
-  text-decoration: underline overline wavy yellow;
+  text-decoration: underline overline wavy yellow !important;
 }
+
 .nav-mobile,
 .main-nav-mobile,
 .close-menu {
   display: none;
 }
-
+.section {
+  min-height: 90vh;
+}
 #section1 {
   max-width: 100vw;
-  min-height: 50vh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   background-color: #d4e9e2;
-  background-image: url(/img/img3.webp);
+  background-image: url(https://www.starbucks.com/weblx/images/rewards/hero/xl-hero-desktop_2021.png);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .about-text {
   display: flex;
@@ -97,25 +100,31 @@ nav {
 .how-to p {
   text-align: center;
   line-height: 1.5;
+  font-size: 20px;
 }
 .how-to h3 {
   margin: 1rem 0;
+  font-size: 20px;
+
 }
 #section3 {
+  display: flex;
+  flex-direction: column;
   background-color: #d4e9e2;
-  padding: 2rem 0;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .extra-text {
   max-width: 70vw;
-  margin: auto;
 }
 .extra-text h3 {
   text-align: center;
   padding: 1rem 0;
-  font-weight: 700;
+  font-size: 1.7rem;
 }
 .extra-text p {
   text-align: center;
+  font-size: 1.5rem;
 }
 .extra-details {
   display: grid;
@@ -139,6 +148,7 @@ nav {
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  /* padding: 100px 1rem; */
 }
 .form {
   margin: 1rem;
@@ -184,7 +194,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 2rem 1rem;
+  padding: 3rem 1rem;
   background-color: #f3f1e7;
 }
 @media (min-width: 311px) and (max-width: 599px) {
@@ -220,6 +230,9 @@ footer {
     font-weight: 900;
     color: #1e3932;
   }
+  .active-nav a {
+    text-decoration: underline overline wavy #1e3932 !important;
+  }
   .side-nav {
     position: absolute;
     top: 0;
@@ -228,7 +241,6 @@ footer {
     height: 50vh;
     width: 100vw;
     background-color: #f3f1e7;
-    /* transform: translateX(100%); */
     display: none;
   }
   .show-side-nav {
@@ -240,6 +252,11 @@ footer {
     justify-content: flex-end;
     padding-right: 1.25rem;
   }
+  /* .section {
+    min-height: 90vh;
+    max-width: 100vw;
+    border: 2px solid orange;
+  } */
   #section1 {
     display: flex;
     justify-content: center;
@@ -247,7 +264,6 @@ footer {
     max-width: 100vw;
     min-height: 100vh;
     background-color: #d4e9e2;
-    background-image: url(/img/img3.webp);
     background-size: 300% auto;
     background-repeat: no-repeat;
     position: relative;
@@ -291,7 +307,15 @@ footer {
     padding-top: 1.25rem;
     justify-content: space-between;
   }
-
+  .extra-text h3 {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1rem;
+  }
+  .extra-text p {
+    text-align: center;
+    font-size: 1rem;
+  }
   .fas {
     font-size: 60px;
     padding: 1.5rem 0;
@@ -328,7 +352,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
+    padding: 2rem 0rem;
     background-color: #f3f1e7;
   }
   .jump {
