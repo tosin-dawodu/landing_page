@@ -59,7 +59,7 @@ let attachListEvent = function (listArray) {
       let sec = document.getElementById(sectionId);
       window.scrollTo({
         top: sec.offsetTop - 50,
-        behaviour: "smooth",
+        behavior: "smooth",
       });
       x.classList.add("active-nav");
     });
